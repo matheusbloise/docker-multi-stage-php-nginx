@@ -1,3 +1,5 @@
+LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
+
 FROM php:7.4-fpm-alpine AS base
 
 WORKDIR /app
