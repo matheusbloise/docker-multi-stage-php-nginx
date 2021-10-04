@@ -47,7 +47,7 @@ You can find much more on how to use this project in our [Wiki](https://github.c
 
 ## Contributors ✒️
 
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/matheusbloise/docker-multi-stage-php-nginx/graphs/contributors) quíenes han participado en este proyecto. 
+You can also see the list of all [contributors](https://github.com/matheusbloise/docker-multi-stage-php-nginx/graphs/contributors) who have participated in this project.
 
 ## License 📄
 
