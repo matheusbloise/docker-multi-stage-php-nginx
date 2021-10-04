@@ -6,3 +6,79 @@ services:
     build:
       context: docker/php
       target: production
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=PHP]
+      # service resource management
+      resources:
+        # Hard limit - Docker does not allow to allocate more
+        limits:
+          cpus: '1'
+          memory: 1024M
+        # Soft limit - Docker makes best effort to return to it
+        reservations:
+          cpus: '1'
+          memory: 512M
+      # service restart policy
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      # service update configuration
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: continue
+        monitor: 60s
+        max_failure_ratio: 0.3
+      # service rallback configuration
+      rollback_config:
+        delay: 5s
+        parallelism: 2
+        failure_action: pause
+        max_failure_ratio: 1
+      # placement constraint - in this case on 'worker' nodes only
+      placement:
+        constraints: [node.role == production]
+        max_replicas_per_node: 1
+
+  nginx:
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=PHP, ENV=DEV]
+      # service resource management
+      resources:
+        # Hard limit - Docker does not allow to allocate more
+        limits:
+          cpus: '1'
+          memory: 1024M
+        # Soft limit - Docker makes best effort to return to it
+        reservations:
+          cpus: '1'
+          memory: 1024M
+      # service restart policy
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      # service update configuration
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: continue
+        monitor: 60s
+        max_failure_ratio: 0.3
+      # service rallback configuration
+      rollback_config:
+        delay: 5s
+        parallelism: 2
+        failure_action: pause
+        max_failure_ratio: 1
+      # placement constraint - in this case on 'worker' nodes only
+      placement:
+        constraints: [node.role == production]
+        max_replicas_per_node: 1
