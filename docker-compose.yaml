@@ -2,16 +2,16 @@ version: "3.7"
 
 services:
   php:
-    container_name: php
+    container_name: php #useful just without docker-swarm
     hostname: php
     build:
       context: docker/php
-      target: development
+      target: development #target environment (development, production)
     volumes:
       - ./:/app
-      - php-fpm:/usr/local/sbin/
+      #- php-fpm:/usr/local/sbin/
     networks:
-      - backend
+      - overlay
     deploy:
       mode: replicated
       replicas: 1
@@ -52,9 +52,9 @@ services:
       - "80:80"
     volumes:
       - ./:/app
-      - php-fpm:/run/php/
+      #- php-fpm:/run/php/ volume mapping sock unix php-fpm, you can change for TCP connection on nginx -> .conf -> fastcgi_pass
     networks:
-      - backend
+      - overlay
     depends_on:
       - php
     deploy:
@@ -88,8 +88,8 @@ services:
       placement:
         constraints: [node.role == development]
 
-volumes:
-  php-fpm:
+#volumes:
+#  php-fpm:
 
 networks:
-  backend:
+  overlay:
