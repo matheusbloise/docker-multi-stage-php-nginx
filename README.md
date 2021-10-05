@@ -43,6 +43,12 @@ For the production environment, the execution of the project is a bit different 
     docker-compose -f docker-compose.yml -f docker-compose-cloud.yml up
 ```
 
+### "PHP JIT (Just-in-time compilation), already enable on production stage"
+![Jit](docs/img/235623857-ff32eb05-a11f-4sp9-a382-64271h26c422.png "PHP JIT (Just-in-time compilation)")
+
+OBS: If you don't want JIT configuration enable, just disable on prod.ini file inside php folder.
+Feel free to modify the configs to attend what your application needs.
+
 ## Contributing 🖇️
 
 Please see [CONTRIBUTING.md](https://gist.github.com/matheusbloise/xxxxxx) for details of our code of conduct, and the process for submitting pull requests to us.
