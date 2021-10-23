@@ -4,22 +4,22 @@
 
 ## About the project
 
-This project it's just a PHP and NGINX docker optimized and ready to use for (production or development) configured by target on docker-compose file. Why you should use this code base? Because this repo provide a nicely and simple docker environment, you will find just the necessery extensions for production app or development.
+This project is just a PHP and NGINX docker optimized and ready to use for (production or development) configured by target on docker-compose file. Why you should use this code base? Because this repo provides a nice and simple docker environment, you will find just the necessary extensions for production app or development.
 
 ## Prerequisites 📋
 
 * Docker
 * docker-compose
 
-## Instalation 🔧
+## Installation 🔧
 
-The installation of the project is very simple, it consists of two steps a first step is to download the repository using git clone.
+The installation of the project is very simple. It consists of two steps the first step is to download the repository using git clone.
 
 ```bash
     git clone git@github.com:matheusbloise/docker-multi-stage-php-nginx.git
 ```
 
-And the second step, to start the project is to execute the following command
+And the second step, is to start the project by executing the following command
 
 ```bash
     docker-compose up
@@ -29,7 +29,7 @@ And the second step, to start the project is to execute the following command
 
 ### Local or dev environments
 
-To use it locally you have to run docker-compose and the project will start in development mode, this mode will be used both for local development and for the development environment.
+To use it locally you have to run docker-compose and the project will start in development mode. This mode will be used both for local development and for the development environment.
 
 ```bash
     docker-compose up
