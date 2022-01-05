@@ -1,4 +1,4 @@
-FROM php:8.0.11-fpm-alpine AS base
+FROM php:8.1-fpm-alpine AS base
 
 LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
 
@@ -17,7 +17,7 @@ FROM base AS development
 ADD conf.d/dev.ini "$PHP_INI_DIR/conf.d/php.ini"
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" \
-    && pecl install xdebug-3.0.4 \
+    && pecl install xdebug-3.1.2 \
     && docker-php-ext-enable xdebug
 
 
