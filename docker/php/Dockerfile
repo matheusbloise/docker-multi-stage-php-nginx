@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine AS base
+FROM php:7.4.28-fpm-alpine AS base
 
 LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
 
