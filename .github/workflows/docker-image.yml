@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker-compose build --no-cache php
-      - run: docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
+      - run: docker image tag docker-multi-stage-php-nginx_php:latest matheusbloise/php:8.1-fpm-alpine-dev
       - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username matheusbloise --password-stdin
       - run: docker image ls
-      - run: docker push "matheusbloise/php:8.1-fpm-alpine-dev"
+      - run: docker push matheusbloise/php:8.1-fpm-alpine-dev
