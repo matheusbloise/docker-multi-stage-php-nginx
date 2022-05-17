@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ php-8.1 ]
+  pull_request:
+    branches: [ php-8.1 ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - env:
+      DOCKER_USER: ${{ secret.DOCKER_USER }}
+      DOCKER_PASSWORD: ${{ secret.DOCKER_PASSWORD }}
+
+    - name: Docker login
+    - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    - name: Build the Docker dev image
+      run: docker-compose build php --no-cache
+
+    - name: Tag the new image
+      run: docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
+
+    - name: Push the image to Docker Hub
+      run: docker push php:8.1-fpm-alpine-dev
