@@ -13,4 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Image
-        run: docker-compose build php --no-cache
+        run: docker-compose build --no-cache php
+
+      - name: Docker login
+      - env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
