@@ -15,4 +15,5 @@ jobs:
       - run: docker-compose build --no-cache php
       - run: docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
       - run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: echo ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
       - run: docker push ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
