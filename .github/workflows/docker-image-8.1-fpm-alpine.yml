@@ -11,19 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
 
     - name: Docker login
+    - uses: actions/checkout@v3
     - env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build the Docker dev image
-    - run: docker-compose build php --no-cache
+    - run: |
+        docker-compose build php --no-cache
 
     - name: Tag the new image
-    - run: docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
+    - run: |
+        docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
 
     - name: Push the image to Docker Hub
-    - run: docker push php:8.1-fpm-alpine-dev
+    - run: |
+        docker push php:8.1-fpm-alpine-dev
