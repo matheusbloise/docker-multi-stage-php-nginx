@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Image
-        run: docker-compose build php --no-cache
+        run: docker-compose build --no-cache php
