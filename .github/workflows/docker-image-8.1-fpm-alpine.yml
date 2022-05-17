@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: "Build Image"
+      - name: Build Image
       - uses: actions/checkout@v3
       - env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -19,5 +19,5 @@ jobs:
       - run: docker-compose build php --no-cache
       - run: docker image tag docker-multi-stage-php-nginx_php:latest php:8.1-fpm-alpine-dev
 
-      - name: "Push to Docker Hub"
+      - name: Push to Docker Hub
       - run: docker push php:8.1-fpm-alpine-dev
