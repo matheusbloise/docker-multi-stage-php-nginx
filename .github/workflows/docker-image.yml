@@ -16,8 +16,8 @@ jobs:
       - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
   
   push:
+    needs: build
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
