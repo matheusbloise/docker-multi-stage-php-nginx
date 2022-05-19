@@ -15,5 +15,13 @@ jobs:
       - run: docker-compose build --no-cache php
       - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
-      - run: docker image ls
+      - run: docker push ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
+  
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
+      - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
       - run: docker push ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
