@@ -17,7 +17,6 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" \
     && pecl install xdebug-3.1.2 \
     && docker-php-ext-enable xdebug
 
-
 FROM base AS production
 
 ADD conf.d/prod.ini "$PHP_INI_DIR/conf.d/php.ini"
