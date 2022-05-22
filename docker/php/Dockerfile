@@ -1,4 +1,4 @@
-FROM php:8.0.16-fpm-alpine AS base
+FROM php:8.0-fpm-alpine AS base
 
 LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
 
@@ -9,8 +9,8 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions \
     && install-php-extensions @composer-2.0.2 \
     && apk --update add --no-cache ${PHPIZE_DEPS} \
-            && pecl install redis-5.3.4 \
-            && docker-php-ext-enable redis
+    && pecl install redis-5.3.4 \
+    && docker-php-ext-enable redis
 
 FROM base AS development
 
