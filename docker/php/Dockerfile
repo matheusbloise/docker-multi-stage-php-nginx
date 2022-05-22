@@ -4,6 +4,8 @@ LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
 
 WORKDIR /app
 
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apk --update add --no-cache ${PHPIZE_DEPS} \
