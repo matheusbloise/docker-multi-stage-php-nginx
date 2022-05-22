@@ -9,6 +9,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apk --update add --no-cache ${PHPIZE_DEPS} \
+    && chmod +x /usr/local/bin/install-php-extensions \
     && rm -rf /var/cache/apk/*
 
 FROM base AS development
