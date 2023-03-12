@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [php-8.1-jit]
+    branches: [php-8.2-jit]
   pull_request:
-    branches: [php-8.1-jit]
+    branches: [php-8.2-jit]
 
 jobs:
   build-push-dev:
@@ -12,15 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker-compose build --no-cache php
-      - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
+      - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.2-fpm-alpine-dev
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
-      - run: docker push ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-dev
+      - run: docker push ${{ secrets.DOCKER_USER }}/php:8.2-fpm-alpine-dev
   
   build-push-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: docker-compose -f docker-compose-cloud.yaml build --no-cache php
-      - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-jit-prod
+      - run: docker image tag docker-multi-stage-php-nginx_php:latest ${{ secrets.DOCKER_USER }}/php:8.2-fpm-alpine-jit-prod
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
-      - run: docker push ${{ secrets.DOCKER_USER }}/php:8.1-fpm-alpine-jit-prod
+      - run: docker push ${{ secrets.DOCKER_USER }}/php:8.2-fpm-alpine-jit-prod
