@@ -1,4 +1,4 @@
-FROM php:8.0.16-fpm-alpine AS base
+FROM php:8.0-fpm-alpine AS base
 
 LABEL maintainer="Matheus Bloise <matheusbloisev@hotmail.com>"
 
@@ -6,20 +6,19 @@ WORKDIR /app
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/install-php-extensions \
-    && install-php-extensions @composer-2.0.2 \
-    && apk --update add --no-cache ${PHPIZE_DEPS} \
-            && pecl install redis-5.3.4 \
-            && docker-php-ext-enable redis
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN apk --update add --no-cache ${PHPIZE_DEPS} \
+    && chmod +x /usr/local/bin/install-php-extensions \
+    && rm -rf /var/cache/apk/*
 
 FROM base AS development
 
 ADD conf.d/dev.ini "$PHP_INI_DIR/conf.d/php.ini"
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" \
-    && pecl install xdebug-3.0.4 \
+    && pecl install xdebug-3.1.4 \
     && docker-php-ext-enable xdebug
-
 
 FROM base AS production
 
